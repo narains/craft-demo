@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '../../../elements/button';
 import Input from '../../../elements/input';
 import ErrorList from '../../../elements/errorList';
-import { BUTTON_ADD_NEW_CHOICE } from '../../../MessageBundle';
 import { MAX_CHOICES, OPERATIONS } from '../../../Constants';
 import { DispatchContext } from '../../../context/fieldContext';
 import ValidationUtil from '../../../helper/validation';
 import {
+	BUTTON_ADD_NEW_CHOICE,
 	CHOICE_ALREADY_EXISTS,
 	REACHED_MAX_LIMIT_FOR_CHOICES
 } from '../../../MessageBundle';
@@ -16,23 +16,17 @@ const ChoiceAdd = () => {
 	const [choice, setChoice] = useState('');
 	const { state, dispatch } = useContext(DispatchContext);
 
-	useEffect(() => {
-		validateInput(choice);
-	}, [state.field.choices]);
-
 	const handleInputChange = event => {
 		event.preventDefault();
 		const { value } = event.target;
 
 		setChoice(value);
-		// validateInput(value);	
 	};
 
 	const handleFormSubmit = event => {
-		event.preventDefault();
-
 		const errors = validateInput(choice);
-		if (errors.length > 0) return;
+
+		if (errors.addChoice.length > 0) return;
 
 		if (choice) {
 			dispatch({
@@ -43,27 +37,31 @@ const ChoiceAdd = () => {
 			});
 			setChoice('');
 		}
+
+		event.preventDefault();
 	};
 
 	const validateInput = value => {
-		const errors = [];
-				if(ValidationUtil.hasReachedMaxLimit(state.field.choices, MAX_CHOICES) && choice){
-					errors.push(REACHED_MAX_LIMIT_FOR_CHOICES(MAX_CHOICES))
-				}
+		const errors = {
+			'addChoice': []
+		};
 
-				if(ValidationUtil.ifExists(state.field.choices, value)){
-					errors.push(CHOICE_ALREADY_EXISTS(value))
-				}
-				dispatch({
-							type: OPERATIONS.HANDLE_CHANGE_FOR_ADD_CHOICE,
-							payload: {
-								errors
-							}
-				});
+		if (ValidationUtil.hasReachedMaxLimit(state.field.choices, MAX_CHOICES) && choice) {
+			errors['addChoice'].push(REACHED_MAX_LIMIT_FOR_CHOICES(MAX_CHOICES));
+		}
 
-				return errors;
-	}
-		
+		if (ValidationUtil.ifExists(state.field.choices, value)) {
+			errors['addChoice'].push(CHOICE_ALREADY_EXISTS(value));
+		}
+		dispatch({
+			type: OPERATIONS.SET_ERROR,
+			payload: {
+				errors
+			}
+		});
+
+		return errors;
+	};
 
 	return (
 		<ChoiceAddWrapper>
@@ -74,9 +72,9 @@ const ChoiceAdd = () => {
 					name="name"
 					handleChange={handleInputChange}
 				/>
-				<Button text={BUTTON_ADD_NEW_CHOICE} action={handleFormSubmit} theme={ {size: '1rem', color: '#008094'} }/>
-			</ChoiceAddInputWrapper>	
-			<ErrorList errors={state.error.addChoice} /> 
+				<Button text={BUTTON_ADD_NEW_CHOICE} action={handleFormSubmit} theme={ { size: '1rem', color: '#008094' } }/>
+			</ChoiceAddInputWrapper>
+			<ErrorList errors={state.error.addChoice} />
 		</ChoiceAddWrapper>
 	);
 };

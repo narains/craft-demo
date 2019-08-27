@@ -6,6 +6,7 @@ import Checkbox from '../../../elements/checkbox';
 import Select from '../../../elements/select';
 import Label from '../../../elements/label';
 import Input from '../../../elements/input';
+import ErrorList from '../../../elements/errorList';
 import {
 	FIELD_CHOICES,
 	FIELD_DEFAULT_VALUE,
@@ -15,17 +16,17 @@ import {
 	FIELD_TYPE
 } from '../../../MessageBundle';
 import { TYPE, OPERATIONS, ORDER } from '../../../Constants';
-import { FieldBodyWrapper,  FormGroupWrapper } from './style';
+import { FieldBodyWrapper, FormGroupWrapper } from './style';
 
 const FieldBody = () => {
 	const { state, dispatch } = useContext(DispatchContext);
-	
+
 	// Handling events
 	const handleInputChange = event => {
 		const { name, value } = event.target;
 
 		dispatch({
-			type: OPERATIONS.HANDLE_INPUT_CHANGE,
+			type: OPERATIONS.INPUT_CHANGE,
 			payload: {
 				name,
 				value
@@ -37,7 +38,7 @@ const FieldBody = () => {
 		const { name } = event.target;
 
 		dispatch({
-			type: OPERATIONS.HANDLE_CHECK_BOX_CHANGE,
+			type: OPERATIONS.CHECK_BOX_CHANGE,
 			payload: {
 				name
 			}
@@ -53,9 +54,9 @@ const FieldBody = () => {
 					type="text"
 					name="label"
 					handleChange={handleInputChange}
-					errors={state.error.label}
-				/>				
+				/>
 			</FormGroupWrapper>
+			<ErrorList errors={state.error.label} />
 			<FormGroupWrapper>
 				<Label label={FIELD_TYPE} />
 				<Select
@@ -80,6 +81,7 @@ const FieldBody = () => {
 					handleChange={handleInputChange}
 				/>
 			</FormGroupWrapper>
+			<ErrorList errors={state.error.default} />
 			<FormGroupWrapper>
 				<Label label={FIELD_CHOICES} />
 				<Choices />

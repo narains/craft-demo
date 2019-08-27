@@ -19,7 +19,7 @@ class ValidationUtil {
 	}
 
 	/**
-   * Returns true if the choice being added already exists.
+   * Returns true if the choice to be added already exists.
    *
    * @param choices list of choices.
    * @param choice actual choice that needs to be added.
@@ -29,5 +29,4 @@ class ValidationUtil {
 	}
 }
 
-// TODO atleast one choice required validation
 export default new ValidationUtil();

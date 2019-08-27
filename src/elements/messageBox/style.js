@@ -9,4 +9,5 @@ export const MessageBoxWrapper = styled.span`
     padding: 0.5rem;
     border-radius: 0.3rem;
     border: 1px solid ${props => (props.theme.color ? props.theme.color : 'red')};
+    margin: 0 0.5em 0.5em 0;
 `;

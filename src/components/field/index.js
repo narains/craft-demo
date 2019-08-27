@@ -4,16 +4,14 @@ import FieldFooter from './fieldFooter';
 import Title from '../../elements/title';
 import { FIELD_TITLE } from '../../MessageBundle'; // Get strings from message bundle
 import {
-	FieldWrapper,
+	FieldWrapper
 } from './style';
 
 const Field = () => (
 	<FieldWrapper>
-		<Title primary text={FIELD_TITLE} />
-		<form>
-			<FieldBody />
-			<FieldFooter />
-		</form>
+		<Title text={FIELD_TITLE} theme={ { color: '#45687F', backgroundColor: '#DCEDF5' } }/>
+		<FieldBody />
+		<FieldFooter />
 	</FieldWrapper>
 );
 

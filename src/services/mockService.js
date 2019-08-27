@@ -1,5 +1,8 @@
 const FieldService = {
-	getField: function (id) {
+	/**
+   * Returns field object
+   */
+	getField () {
 		return {
 			label: 'Sales region',
 			required: false,
@@ -12,13 +15,18 @@ const FieldService = {
 				'Latin America',
 				'Middle East and Africa'
 			],
-			displayAlpha: true,
+			type: 'multiSelect',
+			displayOrder: 'alphabetical',
 			default: 'North America'
 		};
 	},
-	saveField: function (url, fieldJson) {
-		// Add the code here to call the API (or temporarily, just log fieldJson to the console)
-		// todo(shruti): Use async await
+	/**
+   * Returns response from the server after making a POST call
+   *
+   * @param url the url to send the request.
+   * @param fieldJson the field object that needs to be saved.
+   */
+	saveField (url, fieldJson) {
 		return fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(fieldJson),

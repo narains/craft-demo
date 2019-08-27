@@ -7,17 +7,14 @@ import submitReducer from '../reducers/submitReducer';
 // Creating Context in order to access global state from child components
 const DispatchContext = createContext(null);
 
-// const DispatchContext = React.createContext(initialFieldState);
-
 const DispatchProvider = ({ children }) => {
-	// const [state, dispatch] = useReducer(reducer, initialFieldState);
 	const [error, dispatchError] = useReducer(errorReducer, INITIAL_ERROR_STATE);
 	const [field, dispatchField] = useReducer(fieldReducer, INITIAL_FIELD_STATE);
 	const [submit, dispatchSubmit] = useReducer(submitReducer, INITIAL_SUBMIT_STAGE);
 
-  	// Global Dispatch Function
-  	const dispatch = action =>
-    [dispatchError, dispatchField, dispatchSubmit].forEach(fn => fn(action));
+	// Global Dispatch Function
+	const dispatch = action =>
+		[dispatchError, dispatchField, dispatchSubmit].forEach(fn => fn(action));
 
 	// Global State
 	const state = {

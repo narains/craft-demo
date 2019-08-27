@@ -13,6 +13,10 @@ export const FormGroupWrapper = styled.div`
     flex-flow: row wrap;
     margin-top: 1em;
     width: 80%;
-    align-items: center;
+    align-items: felx-start;
 
+`;
+
+export const CheckboxWrapper = styled.input`
+	align-self: center;
 `;

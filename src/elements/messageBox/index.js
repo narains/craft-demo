@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { MessageBoxWrapper } from './style';
 
-const MessageBox = ({text, theme}) => {
-    return (
-        <MessageBoxWrapper theme={theme}>
-            {text}
-        </MessageBoxWrapper>
-    )
-}
+const MessageBox = ({ text, theme }) => (
+	<MessageBoxWrapper theme={theme}>
+		{text}
+	</MessageBoxWrapper>
+);
 
-export default MessageBox
+export default MessageBox;

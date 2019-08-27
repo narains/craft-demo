@@ -2,7 +2,7 @@ import { INITIAL_SUBMIT_STAGE, OPERATIONS } from '../Constants';
 
 export default (state, action) => {
 	switch (action.type) {
-    	// Handling form submit
+	// Handling form submit
 	case OPERATIONS.SUBMIT_STARTED:
 		return { ...state, submitted: false, loading: true };
 

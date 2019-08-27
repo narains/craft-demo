@@ -6,7 +6,7 @@ import {
 const ErrorList = ({ errors }) => errors && errors.length > 0 ? (
 	<ErrorListWrapper>
 		{errors.map(error => (
-			<li key={error}>{error}</li>
+			<span key={error}>{error}</span>
 		))}
 	</ErrorListWrapper>
 ) : null;

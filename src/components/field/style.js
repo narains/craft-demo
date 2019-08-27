@@ -5,11 +5,7 @@ export const FieldWrapper = styled.div`
     border-radius: 5px;
 	background: #fff;
 	max-width: 640px;
-	min-height: 800px;
+	min-height: 700px;
 	margin: 1em auto;
-	// padding: 1em; 
 	border: 1px solid #DFEAF3
-	// width: 50%;
-	// height: 100%;
-	// margin: 0 25% 0 25%;
 `;
